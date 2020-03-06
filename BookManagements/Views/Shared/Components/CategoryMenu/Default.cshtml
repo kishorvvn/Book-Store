@@ -1,0 +1,13 @@
+﻿<li class="dropdown">
+    <a asp-controller="home" 
+    asp-action="index" 
+    class="dropdown-toggle" data-toggle="dropdown"> Books by category <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        
+        <li class="devider"></li>
+        <li>
+            <a asp-controller="Book" asp-action="List" asp-route-category="">All books</a>
+        </li>
+    </ul>
+</li>

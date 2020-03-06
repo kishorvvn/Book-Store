@@ -1,0 +1,51 @@
+﻿@model BookManagements.ViewModels.HomeDetailsViewModel
+
+@{
+
+    ViewBag.Title = "Book Details";
+    var photoPath = "~/images/" + (Model.Book.PhotoPath ?? "noImage.png");
+}
+<h4>Reviews about </h4>
+<div class=" text-center">
+    <a asp-controller="Review" asp-action="Add" asp-route-id="@Model.Book.Id" class="btn btn-info float-right"> Write a review</a>
+   
+</div>
+<div class="media">
+    <img class="card-img img-thumbnail" src="@photoPath" style="height:190px; width:150px; margin-left:50px" asp-append-version="true" />
+    <div class="card col-sm-8 mx-auto d-block media-body">
+        <div class="card-header"><h4> @Model.Book.Title</h4></div>
+
+        <div class="card">
+            @if (Model.Reviews != null && Model.Reviews.Count() > 0)
+            {
+                @if (Model.Book.Reviews != null)
+                {
+                    @foreach (var review in Model.Book.Reviews)
+                    {
+                            <div class="row">
+                                    <p class="col-sm-9 ml-1">
+                                        @review.ReviewComments
+                                        <div class="row float-right mr-1">
+                                            @review.Rating
+                                            <div class="ml-2 text-warning">
+                                                <div class="star-ratings-sprite "><span style="@Html.Raw("width:" + (review.Rating * 20) + "%;")" class="star-ratings-sprite-rating small"></span></div>
+                                                <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+                                            </div>
+                                        </div>
+                                     </p>
+                                </div>
+                            <hr />
+                    }
+                }
+                else
+                {
+                    <p>There are no reviews</p>
+                }
+            }
+            else
+            {
+                <p>There are no reviews</p>
+            }
+        </div>
+    </div>
+</div>
